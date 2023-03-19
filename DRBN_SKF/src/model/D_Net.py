@@ -360,28 +360,20 @@ def calculate_loss_D(model_D, input_high, out, seg_map):
     N, C, H, W = input_high.shape
     max_1_seg = torch.zeros(N, 1, H, W).cuda()
     max_2_seg = max_1_seg
-    max_3_seg = max_1_seg
     seg_cls = seg_map.reshape(N, seg_map.shape[1], -1)
     # seg_cls = seg_cls.argmax(dim=1)
     seg_cls_1 = torch.sum(seg_cls, dim=2)  # N x cls
     cls_max_1 = seg_cls_1.argmax(dim=1)   # N
     for i in range(N):
-        seg_cls_1[i, cls_max_1[i]] = 0  # exclude 1st max cls
+        seg_cls_1[i, cls_max_1[i]] = 0
     cls_max_2 = seg_cls_1.argmax(dim=1)
-    for i in range(N):
-        seg_cls_1[i, cls_max_1[i]] = 0  # exclude 2nd max cls
-    cls_max_3 = seg_cls_1.argmax(dim=1)
     for i in range(N):
         max_1_seg[i, :, :, :] = seg_map[i, cls_max_1[i], :, :]
         max_2_seg[i, :, :, :] = seg_map[i, cls_max_2[i], :, :]
-        max_3_seg[i, :, :, :] = seg_map[i, cls_max_3[i], :, :]
     input_high_seg_1 = input_high * torch.cat((max_1_seg, max_1_seg, max_1_seg), dim=1)
-    # input_high_seg_2 = input_high * torch.cat((max_2_seg, max_2_seg, max_2_seg), dim=1)
-    # input_high_seg_3 = input_high * torch.cat((max_3_seg, max_3_seg, max_3_seg), dim=1)
-
+    input_high_seg_2 = input_high * torch.cat((max_2_seg, max_2_seg, max_2_seg), dim=1)
     out_seg_1 = out * torch.cat((max_1_seg, max_1_seg, max_1_seg), dim=1)
     out_seg_2 = out * torch.cat((max_2_seg, max_2_seg, max_2_seg), dim=1)
-    out_seg_3 = out * torch.cat((max_3_seg, max_3_seg, max_3_seg), dim=1)
 
     fake = torch.zeros((len(out), 1)).cuda()
     real = torch.ones((len(out), 1)).cuda()
@@ -390,24 +382,29 @@ def calculate_loss_D(model_D, input_high, out, seg_map):
 
     fake_label_max_1 = model_D(out_seg_1)
     fake_label_max_2 = model_D(out_seg_2)
-    fake_label_max_3 = model_D(out_seg_3)
     real_label_max_1 = model_D(input_high_seg_1)
-    # real_label_max_2 = model_D(input_high_seg_2)
-    # real_label_max_3 = model_D(input_high_seg_3)
+    real_label_max_2 = model_D(input_high_seg_2)
 
     fake_loss = MSEloss(fake_label, fake)
     real_loss = MSEloss(real_label, real)
 
-    fake_list = [fake_label_max_1, fake_label_max_2, fake_label_max_3]
-    min_index = fake_list.index(min(fake_list))
-
-    fake_loss_max_1 = MSEloss(fake_list[min_index], fake)
-    # fake_loss_max_2 = MSEloss(fake_label_max_2, fake)
+    fake_loss_max_1 = MSEloss(fake_label_max_1, fake)
+    fake_loss_max_2 = MSEloss(fake_label_max_2, fake)
     real_loss_max_1 = MSEloss(real_label_max_1, real)
-    # real_loss_max_2 = MSEloss(real_label_max_2, real)
+    real_loss_max_2 = MSEloss(real_label_max_2, real)
 
-    D_loss = lamda * (fake_loss + real_loss) / 2 \
-             + (1 - lamda) * (fake_loss_max_1 + real_loss_max_1) / 2
+    if fake_loss_max_1 > fake_loss_max_2 and real_loss_max_1 > real_loss_max_2:
+        D_loss = lamda * (fake_loss + real_loss) / 2 \
+            + (1 - lamda) * (fake_loss_max_1 + real_loss_max_1) / 2
+    elif fake_loss_max_1 > fake_loss_max_2 and real_loss_max_1 < real_loss_max_2:
+        D_loss = lamda * (fake_loss + real_loss) / 2 \
+                 + (1 - lamda) * (fake_loss_max_1 + real_loss_max_2) / 2
+    elif fake_loss_max_1 < fake_loss_max_2 and real_loss_max_1 > real_loss_max_2:
+        D_loss = lamda * (fake_loss + real_loss) / 2 \
+                 + (1 - lamda) * (fake_loss_max_2 + real_loss_max_1) / 2
+    else:
+        D_loss = lamda * (fake_loss + real_loss) / 2 \
+                 + (1 - lamda) * (fake_loss_max_2 + real_loss_max_2) / 2
 
     return D_loss
 
