@@ -9,5 +9,8 @@ University of Electronic Science and Technology of China (UESTC)
 
 This repository is the **official implementation** of the paper, "Learning Semantic-Aware Knowledge Guidance for Low-Light Image Enhancement", where more implementation details are presented.
 
+## Motivation and Superiority
+![MotiSupe](images/Motivation.png)
+
 ## Overall
 ![Framework](images/framework.png)
