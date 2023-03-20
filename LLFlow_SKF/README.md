@@ -13,10 +13,10 @@ conda env create -f environment.yaml
 
 ### Pre-trained Model
 We provide the pre-trained models with the following settings:
-- LLFlow-S-SKF trained on LOL [[Google drive]()] with training config file `./confs/LOL-S-SKF.yml`
-- LLFlow-S-SKF trained on LOL-v2 [[Google drive]()] with training config file `./confs/LOLv2-S-SKF.yml`.
-- LLFlow-L-SKF trained on LOL [[Google drive]()] with training config file `./confs/LOL-L-SKF.yml`
-- LLFlow-L-SKF trained on LOL-v2 [[Google drive]()] with training config file `./confs/LOLv2-L-SKF.yml`.
+- LLFlow-S-SKF trained on LOL [[Google drive](https://drive.google.com/file/d/16PihEBd0GxbU4L0ImbI86X-Gk_KVSXU1/view?usp=share_link)] with training config file `./confs/LOL-S-SKF.yml`
+- LLFlow-S-SKF trained on LOL-v2 [[Google drive](https://drive.google.com/file/d/1KefXtxKK9HheG5o7-Y2IkrncD6UEffVk/view?usp=share_link)] with training config file `./confs/LOLv2-S-SKF.yml`.
+- LLFlow-L-SKF trained on LOL [[Google drive](https://drive.google.com/file/d/1ItJcHGsegkwkWcUvlFmE6WYAKDZGkAcC/view?usp=share_link)] with training config file `./confs/LOL-L-SKF.yml`
+- LLFlow-L-SKF trained on LOL-v2 [[Google drive](https://drive.google.com/file/d/11TNkFDUgI7P0NX2bpDGlhx9ip0cvQJSa/view?usp=share_link)] with training config file `./confs/LOLv2-L-SKF.yml`.
 
 Put the ckpts in the following way:
 
