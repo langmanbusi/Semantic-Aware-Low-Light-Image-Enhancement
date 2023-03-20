@@ -13,19 +13,17 @@ conda env create -f environment.yaml
 
 ### Pretrained Model
 We provide the pre-trained models with the following settings:
-- DRBN-SKF trained on LOL is put in `./checkpoints/LOL-DRBN-SKF/model_lol.pt`.
-- DRBN-SKF trained on LOL-v2 is put in `./checkpoints/LOLv2-DRBN-SKF/model_lol_v2.pt`.
+- DRBN-SKF trained on LOL [[Google drive](https://drive.google.com/file/d/15djSbeDZd3NY5V-6XlRb-rk6_ljr-zLf/view?usp=sharing)] should be put in `./ckpt/LOL-DRBN-SKF/model_lol.pt`.
+- DRBN-SKF trained on LOL-v2 [[Google drive](https://drive.google.com/file/d/1kO0Da29sCFF6vXwo7B_QuvrZvC31g0Ra/view?usp=sharing)] should be put in `./ckpt/LOLv2-DRBN-SKF/model_lol_v2.pt`.
 
 Put the ckpts in the following way:
 
 ```
 /ckpts
 	/LOL-DRBN-SKF
-		/Relight
-			/model_lol.pt
+		/model_lol.pt
 	/LOLv2-DRBN-SKF
-		/Relight
-			/model_lol_v2.pt
+		/model_lol_v2.pt
 ```
 
 ### Test
