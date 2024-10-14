@@ -5,6 +5,8 @@ Yuhui Wu, Chen Pan, Guoqing Wang*, Yang Yang, Jiwei Wei, Chongyi Li, Heng Tao Sh
 
 University of Electronic Science and Technology of China (UESTC)
 
+# [TPAMI 2024] Towards a Flexible Semantic Guided Model for Single Image Enhancement and Restoration [(Paper)](https://ieeexplore.ieee.org/abstract/document/10607918)
+
 ## Introduction
 
 This repository is the **official implementation** of the paper, "Learning Semantic-Aware Knowledge Guidance for Low-Light Image Enhancement", where more implementation details are presented.
@@ -22,7 +24,7 @@ LOL: Chen Wei, Wenjing Wang, Wenhan Yang, and Jiaying Liu. "Deep Retinex Decompo
 LOL-v2 (the extension work): Wenhan Yang, Haofeng Huang, Wenjing Wang, Shiqi Wang, and Jiaying Liu. "Sparse Gradient Regularized Deep Retinex Network for Robust Low-Light Image Enhancement", TIP, 2021. [[Baiduyun (extracted code: l9xm)]](https://pan.baidu.com/s/1U9ePTfeLlnEbr5dtI1tm5g) [[Google Drive]](https://drive.google.com/file/d/1dzuLCk9_gE2bFF222n3-7GVUlSVHpMYC/view?usp=sharing) <br> <br>
 
 ## Results
-The evauluation results on LOL are as follows:
+The evaluation results on LOL are as follows:
 
 | Method | PSNR | SSIM | LPIPS | Method | PSNR | SSIM | LPIPS |
 | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
@@ -49,6 +51,18 @@ If you find our work useful for your research, please cite our paper
   pages={},
   year={2023}
 }
+
+@ARTICLE{wu2024skfplus,
+  author={Wu, Yuhui and Wang, Guoqing and Liu, Shaochong and Yang, Yang and Li, Wei and Tang, Xiongxin and Gu, Shuhang and Li, Chongyi and Shen, Heng Tao},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Towards a Flexible Semantic Guided Model for Single Image Enhancement and Restoration}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-18},
+  keywords={Semantics;Task analysis;Image color analysis;Histograms;Image enhancement;Visualization;Training;Low-level vision;Low-light image enhancement;semantic guidance;region-aware color constraints},
+  doi={10.1109/TPAMI.2024.3432308}}
+
 ```
 ## Contact
-If you have any question, please feel free to contact us via wuyuhui132@gmail.com or panchen0103@gmail.com.
+If you have any questions, please feel free to contact us via wuyuhui132@gmail.com or panchen0103@gmail.com.
